@@ -214,7 +214,10 @@ class MyTimedRotatingFileHandler(TimedRotatingFileHandler, ConcurrentLock):
                     addend = -3600
                 timeTuple = time.localtime(t + addend)
 
-        dfn = "%s.%s" % (self.baseFilename, time.strftime(self.suffix, timeTuple))
+        baseFilepath = os.path.dirname(self.baseFilename)
+        baseFilename = os.path.basename(self.baseFilename)
+        # dfn = "%s.%s" % (self.baseFilename, time.strftime(self.suffix, timeTuple))
+        dfn = "%s_%s" % ((baseFilepath + '/' + time.strftime(self.suffix, timeTuple)), baseFilename)
         # if os.path.exists(dfn):
         #     os.remove(dfn)
         if not os.path.exists(dfn) and os.path.exists(self.baseFilename):
