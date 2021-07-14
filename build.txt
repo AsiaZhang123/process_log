@@ -1,3 +1,4 @@
-# 修改setup.py中的version，删除之前的dist文件夹
+# 修改setup.py中的version
+# 删除之前的dist文件夹
 # python3 setup.py sdist bdist_wheel
 # twine upload dist/*

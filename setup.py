@@ -6,8 +6,8 @@ with open("README.md", "r") as fh:
 setup(
     name="logging_process",
     packages=find_packages(),
-    version='0.9.4',
-    description="多进程日志，继承自python官方logging，解决多进程下log日志丢失及混乱问题",
+    version='0.9.5',
+    description="多进程日志，继承自python官方logging，解决多进程下log日志丢失及混乱问题,修改time rotating log name",
     long_description=long_description,
     long_description_content_type="text/markdown",
     author="zyz",
