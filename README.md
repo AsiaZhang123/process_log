@@ -5,7 +5,7 @@
 所以完全兼容原logging，参数，用法都用变，直接改变类名称即可使用。
 具体设置方法可以参考example.py
 
-安装方法：pip install logging-process
+安装方法：```pip install logging-process```
 
 版本更新历史：
 
