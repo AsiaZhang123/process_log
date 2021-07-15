@@ -184,6 +184,7 @@ class MyTimedRotatingFileHandler(TimedRotatingFileHandler, ConcurrentLock):
     def __init__(self, filename, when='h', interval=1, backupCount=0, encoding=None, delay=False, utc=False, atTime=None):
         TimedRotatingFileHandler.__init__(self, filename, when, interval, backupCount, encoding, delay, utc, atTime)
         ConcurrentLock.__init__(self, filename, 'a', encoding, delay)
+        self.nameFormat = "{basePath}/{filename}.{suffix}"
 
     def shouldRollover(self, record):
         del record
@@ -214,10 +215,10 @@ class MyTimedRotatingFileHandler(TimedRotatingFileHandler, ConcurrentLock):
                     addend = -3600
                 timeTuple = time.localtime(t + addend)
 
-        baseFilepath = os.path.dirname(self.baseFilename)
-        baseFilename = os.path.basename(self.baseFilename)
         # dfn = "%s.%s" % (self.baseFilename, time.strftime(self.suffix, timeTuple))
-        dfn = "%s_%s" % ((baseFilepath + '/' + time.strftime(self.suffix, timeTuple)), baseFilename)
+        basePath = os.path.dirname(self.baseFilename)
+        filename = os.path.basename(self.baseFilename)
+        dfn = self.nameFormat.format(basePath=basePath, filename=filename, suffix=time.strftime(self.suffix, timeTuple))
         # if os.path.exists(dfn):
         #     os.remove(dfn)
         if not os.path.exists(dfn) and os.path.exists(self.baseFilename):
